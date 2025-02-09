@@ -117,4 +117,18 @@ class HashMap {
 
         return values;
     } 
+
+    entries() {
+        let entries = [];
+
+        for (let i = 0; i < this.buckets.length; i++) {
+            if (this.buckets[i]) { // If there's a bucket at this index
+                for (let entry of this.buckets[i]) { // Iterate over the linked list at this index
+                    entries.push(entry); // Push the key-value (entry)
+                }
+            }
+        }
+
+        return entries;
+    }
 }

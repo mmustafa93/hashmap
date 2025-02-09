@@ -89,4 +89,18 @@ class HashMap {
         this.buckets = new Array(this.capacity);
         this.size = 0;
     }
+
+    key() {
+        let keys = [];
+
+        for (let i = 0; i < this.buckets.length; i++) {
+            if (this.buckets[i]) { // If there's a bucket at this index
+                for (let entry of this.buckets[i]) { // Iterate over the linked list at this index
+                    keys.push(entry[0]); // Push the key (entry[0])
+                }
+            }
+        }
+
+        return keys;
+    }
 }

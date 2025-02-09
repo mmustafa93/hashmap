@@ -80,4 +80,8 @@ class HashMap {
     
         return false; // Return false if the key isn't in the hash map
     }
+
+    length() {
+        return this.size;
+    }
 }

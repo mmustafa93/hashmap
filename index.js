@@ -34,7 +34,33 @@ class HashMap {
         this.buckets[index].push([key, value]); // Store new key-value pair
         this.size++; // Increase size when a new key-value pair is added
     
-        // TODO: Implement resizing when load factor is exceeded
+        // Check if resizing is needed (if load factor exceeded)
+        if (this.size / this.capacity > this.loadFactor) {
+            this.resize(); // Call the resize method
+        }
+    }
+
+    resize() {
+        // Double the capacity
+        this.capacity *= 2;
+
+        // Save the old buckets
+        let oldBuckets = this.buckets;
+        this.buckets = new Array(this.capacity); // Create a new array with the doubled capacity
+
+        // Rehash all existing entries into the new buckets
+    for (let i = 0; i < oldBuckets.length; i++) {
+        if (oldBuckets[i]) {
+            for (let entry of oldBuckets[i]) {
+                let index = this.hash(entry[0]); // Recompute index for the new bucket array
+                if (!this.buckets[index]) {
+                    this.buckets[index] = [];
+                }
+                this.buckets[index].push(entry); // Push the rehashed key-value pair
+            }
+        }
+    }
+
     }
 
     get(key) {
@@ -90,7 +116,7 @@ class HashMap {
         this.size = 0;
     }
 
-    key() {
+    keys() {
         let keys = [];
 
         for (let i = 0; i < this.buckets.length; i++) {
@@ -132,3 +158,5 @@ class HashMap {
         return entries;
     }
 }
+
+export { HashMap }

@@ -64,4 +64,20 @@ class HashMap {
 
         return false; // Return false if the key is not in the hash map
     }
+
+    remove(key) {
+        let index = this.hash(key); // Generate index using hash function
+    
+        if (this.buckets[index]) { // Check if an entry exists at the generated index
+            for (let i = 0; i < this.buckets[index].length; i++) {
+                if (this.buckets[index][i][0] === key) { // Check if the entry matches the key
+                    this.buckets[index].splice(i, 1); // Remove the entry from the array
+                    this.size--; // Decrease the size
+                    return true; // Return true
+                }
+            }
+        }
+    
+        return false; // Return false if the key isn't in the hash map
+    }
 }

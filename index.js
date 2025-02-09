@@ -50,4 +50,18 @@ class HashMap {
         
         return null; // Return null if key is not found
     }
+
+    has(key) {
+        let index = this.hash(key); // Generate index using hash function
+    
+        if (this.buckets[index]){ // Check if an entry exists at the generated index
+            for (let entry of this.buckets[index]){
+                if (entry[0] === key){ // Check if the entry matches the key
+                    return true; // Return true if exists
+                }
+            }
+        }
+
+        return false; // Return false if the key is not in the hash map
+    }
 }

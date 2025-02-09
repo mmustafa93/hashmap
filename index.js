@@ -36,4 +36,18 @@ class HashMap {
     
         // TODO: Implement resizing when load factor is exceeded
     }
+
+    get(key) {
+        let index = this.hash(key); // Generate index using hash function
+    
+        if (this.buckets[index]) { 
+            for (let entry of this.buckets[index]) { 
+                if (entry[0] === key) { // Check if the key matches
+                    return entry[1]; // Return the associated value
+                }
+            }
+        }
+        
+        return null; // Return null if key is not found
+    }
 }
